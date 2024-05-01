@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Page Title</title>
+    <script src="file:///C|/Users/17927/OneDrive - The University of Sydney (Students)/桌面/ELEC3610/functionLib.js"></script>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px; /* Basic font size */
+    font-family: 'Arial', sans-serif; /* Improved font for better readability */
+    background-color: #f4f4f4; /* Light grey background for less strain on eyes */
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: white; /* Solid white background for the main container */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow around the container */
+}
+
+#header, #footer {
+    background-color: #337ab7; /* Changed to a softer blue */
+    color: white; /* White text color */
+    text-align: center;
+    padding: 20px 0; /* Increased padding for better visual spacing */
+    font-size: 1.5em; /* Larger text for headings */
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+    padding: 20px; /* Padding around the main content area */
+}
+
+#menu {
+    background-color: #eeeeee; /* Lighter background for the menu */
+    width: 25%;
+    padding: 20px; /* Increased padding for better spacing */
+    box-shadow: inset -1px 0 10px rgba(0,0,0,0.05); /* Subtle shadow to distinguish the menu */
+}
+
+\
+
+#content {
+    background-color: #5A53C1;
+    order: 3;
+}
+
+#content2 {
+    /* 保留原有的样式，并添加新的样式 */
+    background-color: #FFFFFF; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 20px;
+    width: 100%;
+    max-width: 1200px; /* 或根据你的布局需要调整 */
+}
+
+.post-card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.post-card img {
+    width: 100%;
+    height: 180px; /* 或根据需要调整 */
+    object-fit: cover;
+}
+
+.post-card h3 {
+    font-size: 18px;
+    margin: 16px;
+}
+
+.post-card p {
+    font-size: 14px;
+    color: #333;
+    margin: 0 16px 16px;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+}
+
+.imageContainer img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ccc; /* Border for the image */
+    border-radius: 4px; /* Rounded corners for the image */
+}
+
+.dot {
+    position: absolute;
+    width: 12px; /* Increased size for better visibility */
+    height: 12px;
+    background-color: red;
+    border-radius: 50%;
+    transition: transform 0.3s; /* Smooth scaling when hovered */
+}
+
+.dot.blue {
+    background-color: blue;
+}
+
+.dot:hover {
+    transform: scale(1.5); /* Enlarge dots on hover */
+    cursor: pointer; /* Cursor pointer to indicate clickable */
+}
+
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+    #menu, #content, #content2 {
+        width: 100%; /* Adjust width to 100% for smaller screens */
+        order: unset;
+    }
+    #menu {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+#menu {
+    background-color: #337ab7; /* Blue background for the menu */
+    width: 200px; /* Fixed width for the menu */
+    padding: 20px; /* Increased padding for better spacing */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    text-align: center; /* Align the links to the center */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+.menu-item {
+    font-family: 'Arial', sans-serif; /* Clean and simple font for easy readability */
+    color: white; /* Text color for high contrast */
+    text-decoration: none; /* No underline */
+    font-size: 18px; /* Larger font size for better readability */
+    font-weight: bold; /* Bold font weight for emphasis */
+    line-height: 1.5; /* Increased line height for better text spacing */
+    margin: 0 10px; /* Spacing between items */
+    display: inline-block; /* Align items in a row */
+    padding: 15px 25px; /* Increased padding for a larger click area */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Smooth transitions for effects */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.menu-item:hover {
+    background-color: #4a90e2; /* Lighter blue for hover effect */
+    cursor: pointer; /* Change mouse cursor on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover for 3D effect */
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto; /* Center the form and add space around it */
+    width: 100%;
+    max-width: 400px; /* Adjust the max width as per your design */
+}
+
+.search-input {
+    flex-grow: 1; /* Let the input expand to fill available space */
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 20px; /* Rounded borders for modern look */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); /* Inner shadow for depth */
+    outline: none; /* Remove default focus outline */
+    transition: all 0.3s ease; /* Transition for focus effect */
+}
+
+.search-input:focus {
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.4); /* Deeper shadow for focus */
+    border-color: #337ab7; /* Highlight color when focused */
+}
+
+.search-button {
+    padding: 10px 20px;
+    margin-left: -50px; /* Overlap the button over the input */
+    border: none;
+    background-color: #337ab7; /* Consistent with the theme's blue */
+    color: white;
+    border-radius: 20px; /* Rounded borders */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.search-button:hover,
+.search-button:focus {
+    background-color: #285a8e;
+}
+
+/* Optionally include a search icon inside the input */
+.search-input::placeholder {
+    font-family: Arial, FontAwesome; /* Add FontAwesome if you have it */
+    opacity: 0.7;
+}
+
+/* Clear placeholder on focus */
+.search-input:focus::placeholder {
+    opacity: 0;
+}
+/* Posts Grid and Cards */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Or however many columns you want */
+    gap: 10px;
+    /* Add your styling */
+}
+
+.post-card {
+    /* Add your styling */
+    cursor: pointer;
+}
+
+/* Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+/* Modal Content Box */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 10% auto; /* 10% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    animation: zoomIn 0.5s;
+}
+
+@keyframes zoomIn {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* 确保 HTML 和 body 元素的高度为100% */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 使用视口高度确保container填满屏幕 */
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 这里去掉了对.main的样式更改，因为现在只需要content2的样式 */
+
+#footer {
+    background-color: #337ab7;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1.5em;
+    position: fixed; /* 固定位置 */
+    bottom: 0; /* 固定在底部 */
+    left: 0; /* 从左侧开始 */
+    width: 100%; /* 宽度为100% */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* 页脚上方的阴影 */
+
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <h1 style="margin-bottom:0;">JourneyCraft</h1>
+    </div>
+    <div class="main">
+	  <div id="menu">
+			<a href="#" class="menu-item">My Account</a><br>
+			<a href="#" class="menu-item">Blog</a><br>
+			<a href="#" class="menu-item">History</a><br>
+			<a href="#" class="menu-item">Contact Us</a><br>
+		</div>
+
+	  <div id="content2">
+    <h2>旅游攻略分享</h2>
+	    <form class="search-form" action="#" method="GET">
+        <input type="text" class="search-input" placeholder="搜索景点..." aria-label="Search">
+        <button type="submit" class="search-button">搜索</button>
+    </form>
+<div class="posts-grid">
+    <!-- Post Card 1 -->
+    <div class="post-card" onclick="openModal('modal1')">
+        <img src="fj.png" alt="Post Title">
+        <h3>帖子标题</h3>
+        <p>帖子摘要...</p>
+    </div>
+
+    <!-- Modal for Post Card 1 -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal1')">&times;</span>
+            <h3>详细帖子标题 1</h3>
+            <img src="fj.png" alt="Detailed Post Image">
+            <p>详细帖子内容 1...</p>
+        </div>
+    </div>
+
+    <!-- Post Card 2 -->
+    <div class="post-card" onclick="openModal('modal2')">
+        <img src="fj.png" alt="Post Title">
+        <h3>帖子标题</h3>
+        <p>帖子摘要...</p>
+    </div>
+
+    <!-- Modal for Post Card 2 -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('modal2')">&times;</span>
+            <h3>详细帖子标题 2</h3>
+            <img src="fj.png" alt="Detailed Post Image">
+            <p>详细帖子内容 2...</p>
+        </div>
+    </div>
+
+    <!-- Repeat for Post Card 3 and Post Card 4 ... -->
+</div>
+
+    </div>
+</div>
+
+    </div>
+    <div id="footer">
+        Have a good journey !
+    </div>
+
+<script>
+
+// Function to open modal
+
+// Function to open a modal
+function openModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = 'block';
+}
+
+// Function to close a modal
+function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = 'none';
+}
+
+// Close modal if user clicks anywhere outside of the modal content
+window.onclick = function(event) {
+    var modals = document.querySelectorAll('.modal');
+    modals.forEach(function(modal) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    });
+}
+</script>
+
+</script>
+</body>
+</html>
