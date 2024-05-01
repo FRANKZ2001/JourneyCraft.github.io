@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Page Title</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+        #header {
+            background-color: #337ab7;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 1.5em;
+        }
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh; /* Takes most of the viewport height */
+        }
+        .login-form {
+            text-align: center;
+            width: 300px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            background: white;
+        }
+        input[type="text"], input[type="password"] {
+            width: calc(100% - 22px); /* Full width minus padding */
+            padding: 10px;
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #5A53C1;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #4139A0;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1 style="margin-bottom:0;">JourneyCraft</h1>
+    </div>
+    <div class="center">
+        <form class="login-form" action="main_page.html">
+            <h2>Hi</h2>
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
