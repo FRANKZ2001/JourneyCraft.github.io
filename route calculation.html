@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Time Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 1000px;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 8px; /*radius corner*/
+        padding: 20px; 
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /*shadow performance*/
+        position: relative; /* Make the container a reference for absolute positioning */
+    }
+    h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+    }
+    input[type="text"], select {
+        width: calc(50% - 20px);
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        display: inline-block; /* Display elements inline */
+    }
+    .input-separator {
+        margin: 0 5px; /* Adjust spacing between the two inputs */
+    }
+    input[type="button"] {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="button"]:hover {
+        background-color: #45a049;
+    }
+    .output {
+        margin-top: 10px;
+        text-align: center;
+    }
+    /* Style for the finish button */
+    .finish-button {
+        position: absolute;
+        bottom: 10px; /* Adjust the distance from the bottom */
+        right: 10px; /* Adjust the distance from the right */
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Travel Time Calculator</h1>
+
+    <div>
+        <label for="StHour">Departure Time</label>
+        <input type="text" id="StHour">
+        <span class="input-separator">:</span>
+        <input type="text" id="StMinute">
+    </div>
+
+    <div>
+        <label for="CoMinute">Travel Minute</label>
+        <input type="text" id="CoMinute">
+        <select name="fuhao" id="recommend_tool" onchange="Present_Minute()">
+            <option value="0">None</option>
+            <option value="40">Car</option>
+            <option value="100">Foot</option>
+            <option value="60">Train</option>
+            <option value="50">Bus</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="EdHour">Arrival Time</label>
+        <input type="text" id="EdHour">
+        <span class="input-separator">:</span>
+        <input type="text" id="EdMinute">
+    </div>
+    <div>
+        <input type="button" onclick="End_Hour_Minute()" value="Generate Time">
+        <div class="output">
+            <label for="CostOutput">Cost</label>
+            <input type="text" id="CostOutput" readonly>
+        </div>
+        <input type="button" onclick="Money_Calculation()" value="Generate Cost">
+    </div>
+    <!-- Finish button -->
+    <div class="finish-button">
+        <input type="button" value="Finish" onclick="saveCostValue()">
+    </div>
+</div>
+
+<script>
+    function End_Hour_Minute(){
+        var StartHour = parseFloat(document.getElementById('StHour').value);
+        var StartMinute = parseFloat(document.getElementById('StMinute').value);
+        var Minute = parseFloat(document.getElementById('CoMinute').value);
+        var EndHour = parseInt((StartHour * 60 + StartMinute + Minute) / 60);
+        var EndMinute = (StartHour * 60 + StartMinute + Minute) % 60;
+        document.getElementById("EdHour").value = EndHour;
+        document.getElementById("EdMinute").value = EndMinute;
+    }
+    function Present_Minute(){
+        var Recommend_Minute = document.getElementById('recommend_tool').value;
+        document.getElementById("CoMinute").value = Recommend_Minute;
+    }
+    function Money_Calculation(){
+        var costOutput = document.getElementById('CostOutput');
+
+        var tool = document.getElementById('recommend_tool').value;
+        switch(tool) {
+            case '40':
+                costOutput.value = '600';
+                break;
+            case '100':
+                costOutput.value = '0';
+                break;
+            case '60':
+                costOutput.value = '1500';
+                break;
+            case '50':
+                costOutput.value = '30';
+                break;
+            default:
+                costOutput.value = '';
+        }
+    }
+
+    function saveCostValue() {
+        // 获取 cost value
+        var costValue = document.getElementById('CostOutput').value;
+
+        // 将 cost value 存储到 localStorage 中
+        localStorage.setItem('totalCost', costValue);
+
+        // 提示用户保存成功或者执行其他操作
+        alert('Total cost saved successfully!');
+    }
+</script>
+
+</body>
+</html>

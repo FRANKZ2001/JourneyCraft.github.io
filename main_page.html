@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Page Title</title>
+    <link href="www.journey234.com">
+    <script src="file:///C|/Users/17927/OneDrive - The University of Sydney (Students)/桌面/ELEC3610/functionLib.js"></script>
+    <style>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px; /* Basic font size */
+    font-family: 'Arial', sans-serif; /* Improved font for better readability */
+    background-color: #f4f4f4; /* Light grey background for less strain on eyes */
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: white; /* Solid white background for the main container */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Soft shadow around the container */
+}
+
+#header, #footer {
+    background-color: #337ab7; /* Changed to a softer blue */
+    color: white; /* White text color */
+    text-align: center;
+    padding: 20px 0; /* Increased padding for better visual spacing */
+    font-size: 1.5em; /* Larger text for headings */
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+    padding: 20px; /* Padding around the main content area */
+}
+
+#menu {
+    background-color: #f0f0f0; /* Soft gray background for the menu */
+    width: 200px; /* Fixed width for the menu */
+    padding: 20px; /* Increased padding for better spacing */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    text-align: center; /* Align the links to the center */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+
+#content, #content2 {
+    flex-grow: 1;
+    padding: 20px;
+    transition: background-color 0.3s; /* Smooth transition for background color change */
+}
+
+#content {
+    background-color: #5A53C1;
+    order: 3;
+}
+
+#content2 {
+    background-color: #FFFFFF; /* Changed to pure white for clarity */
+    order: 2;
+    display: flex;
+    flex-direction: column; /* Structuring content vertically */
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+}
+
+.imageContainer img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ccc; /* Border for the image */
+    border-radius: 4px; /* Rounded corners for the image */
+}
+
+.dot {
+    position: absolute;
+    width: 12px; /* Increased size for better visibility */
+    height: 12px;
+    background-color: red;
+    border-radius: 50%;
+    transition: transform 0.3s; /* Smooth scaling when hovered */
+}
+
+.dot.blue {
+    background-color: blue;
+}
+
+.dot:hover {
+    transform: scale(1.5); /* Enlarge dots on hover */
+    cursor: pointer; /* Cursor pointer to indicate clickable */
+}
+
+@media (max-width: 768px) {
+    .main {
+        flex-direction: column;
+    }
+    #menu, #content, #content2 {
+        width: 100%; /* Adjust width to 100% for smaller screens */
+        order: unset;
+    }
+    #menu {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+
+#menu {
+    background-color: #337ab7; /* Blue background for the menu */
+    width: 200px; /* Fixed width for the menu */
+    padding: 20px; /* Increased padding for better spacing */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    text-align: center; /* Align the links to the center */
+    border-radius: 5px; /* Rounded corners for a softer look */
+}
+
+.menu-item {
+    font-family: 'Arial', sans-serif; /* Clean and simple font for easy readability */
+    color: white; /* Text color for high contrast */
+    text-decoration: none; /* No underline */
+    font-size: 18px; /* Larger font size for better readability */
+    font-weight: bold; /* Bold font weight for emphasis */
+    line-height: 1.5; /* Increased line height for better text spacing */
+    margin: 0 10px; /* Spacing between items */
+    display: inline-block; /* Align items in a row */
+    padding: 15px 25px; /* Increased padding for a larger click area */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Smooth transitions for effects */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.menu-item:hover {
+    background-color: #4a90e2; /* Lighter blue for hover effect */
+    cursor: pointer; /* Change mouse cursor on hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover for 3D effect */
+}
+
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="container">
+    <div id="header">
+        <h1 style="margin-bottom:0;">JourneyCraft</h1>
+    </div>
+    <div class="main">
+	  <div id="menu">
+			<a href="#" class="menu-item">My Account</a><br>
+			<a href="test_blog.html" class="menu-item">Blog</a><br>
+			<a href="#" class="menu-item">History</a><br>
+			<a href="#" class="menu-item">Contact Us</a><br>
+		</div>
+
+		<div id="content2">
+    <h4>Find the place you want to travel</h4>
+    <!-- Controls Wrapper for positioning -->
+    <div style="display: flex; justify-content: space-between; padding: 10px;">
+        <div>
+            <button id="undoButton">Undo</button>
+        </div>
+        <div>
+            <select name="Country" id="cou">
+                <option value="Aus">Aus</option>
+                <option value="India">India</option>
+                <option value="Britain">Britain</option>
+                <option value="America">America</option>
+            </select>
+            <select name="City" id="cit">
+                <option value="Sydney">Sydney</option>
+                <option value="NewYork">NewYork</option>
+                <option value="Melborne">Melborne</option>
+                <option value="S">S</option>
+            </select>
+        </div>
+    </div>
+    <div class="imageContainer">
+        <img id="mapImage" src="sydney.jpg" alt="Map">
+        <svg style="position: absolute; top: 0; left: 0; height: 100%; width: 100%;"></svg>
+        <div id="dot1" class="dot" style="top: 61.3%; left: 34.5%;"></div>
+        <div id="dot2" class="dot" style="top: 25%; left: 58%;"></div>
+        <div id="dot3" class="dot" data-info = "The Sydney Opera House is an iconic architectural marvel located on Bennelong Point in Sydney, Australia. Its unique design, resembling sails, makes it instantly recognizable worldwide. As a versatile arts venue, it hosts a wide range of performances, including operas, concerts, and theater productions. Serving as a symbol of Australian culture, it attracts millions of visitors annually, offering guided tours, dining options, and retail experiences" style="top: 67%; left: 64%;"></div>
+        <div id="dot4" class="dot" style="top: 40.8%; left: 40%;"></div>
+    </div>
+</div>
+
+      <div id="content">
+			<h4>Information Block</h4>
+            <div id="Information" style = "background-color:#F8F8F8;height: 374px;width: 300px; float:left;">&nbsp;
+				
+
+			</div>
+	    <div></div>
+		<div></div>
+		<div></div>
+		<h>Cost: </h><input id = "total_cost">
+		
+        </div>
+        
+    </div>
+    <div id="footer">
+        Have a good journey !
+    </div>
+</div>
+<script>
+    const dots = document.querySelectorAll('.dot');
+    const svg = document.querySelector('.imageContainer > svg');
+    let lastClickedDot = null;
+
+    // 为每个点添加点击事件监听
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            // 点变为蓝色
+            this.classList.add('blue');
+            
+            // 如果存在上一个被点击的点，则在两点间绘制线条
+            if (lastClickedDot) {
+                createLine(lastClickedDot, this);
+            }
+            // 更新最后被点击的点
+            lastClickedDot = this;
+        });
+    });
+
+    // 撤销按钮的逻辑
+    document.getElementById('undoButton').addEventListener('click', function() {
+        // 移除所有点的蓝色样式，恢复为初始状态（红色）
+        dots.forEach(dot => {
+            dot.classList.remove('blue');
+        });
+        
+        // 移除SVG内所有线条
+        while (svg.firstChild) {
+            svg.removeChild(svg.firstChild);
+        }
+        
+        // 重置最后被点击的点
+        lastClickedDot = null;
+    });
+
+// 创建并绘制SVG线条的函数
+function createLine(from, to) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    // 计算起始点和终点的位置
+    const x1 = from.offsetLeft + from.offsetWidth / 2;
+    const y1 = from.offsetTop + from.offsetHeight / 2;
+    const x2 = to.offsetLeft + to.offsetWidth / 2;
+    const y2 = to.offsetTop + to.offsetHeight / 2;
+    // 设置线条属性
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('stroke', 'black');
+    
+    // 设置线条粗细
+    line.setAttribute('stroke-width', '4'); // 这里可以调整线条的粗细
+
+    // 添加鼠标悬停事件监听器
+    line.addEventListener('mouseenter', function() {
+        // 当鼠标悬停在线条上时，显示时间在信息块中
+        document.getElementById('Information').textContent = 'Depature: 13:50     Arrival: 14:40';
+    });
+
+    // 添加鼠标离开事件监听器
+    line.addEventListener('mouseleave', function() {
+        // 当鼠标离开线条时，清除信息块内容
+        document.getElementById('Information').textContent = '';
+    });
+
+    // 添加双击事件监听器
+    line.addEventListener('dblclick', function() {
+        // 在双击线条时，跳转到route calculation.html页面
+        window.open('route calculation.html', '_blank');
+    });
+
+    // 将线条添加到SVG元素中
+    svg.appendChild(line);
+}
+
+	document.querySelectorAll('.dot').forEach(dot => {
+    dot.addEventListener('mouseenter', function() {
+        // When mouse enters the dot, show text in the Information box
+        document.getElementById('Information').textContent = 'The Sydney Opera House is an iconic architectural marvel located on Bennelong Point in Sydney, Australia. Its unique design, resembling sails, makes it instantly recognizable worldwide. As a versatile arts venue, it hosts a wide range of performances, including operas, concerts, and theater productions. Serving as a symbol of Australian culture, it attracts millions of visitors annually, offering guided tours, dining options, and retail experiences';
+    });
+
+    dot.addEventListener('mouseleave', function() {
+        // When mouse leaves the dot, clear the Information box
+        document.getElementById('Information').textContent = '';
+    });
+
+    // Existing click event logic here (unchanged)
+    dot.addEventListener('click', function() {
+        // Dot turns blue
+        this.classList.add('blue');
+        
+        // If there was a last clicked dot, draw a line between them
+        if (lastClickedDot) {
+            createLine(lastClickedDot, this);
+        }
+        // Update the last clicked dot reference
+        lastClickedDot = this;
+    });
+});
+
+// Existing undo button logic here (unchanged)
+document.getElementById('undoButton').addEventListener('click', function() {
+    // Remove blue class from all dots, revert to initial state (red)
+    dots.forEach(dot => {
+        dot.classList.remove('blue');
+    });
+    
+    // Remove all lines from SVG
+    while (svg.firstChild) {
+        svg.removeChild(svg.firstChild);
+    }
+    
+    // Reset the last clicked dot
+    lastClickedDot = null;
+});
+document.getElementById('dot4').addEventListener('click', function() {
+    // Change the source of the image when dot4 is clicked
+    document.getElementById('mapImage').src = 'zoo.png'; // Make sure the path is correct based on your server setup
+});
+	
+document.getElementById('cit').addEventListener('change', function() {
+    if (this.value === 'Sydney') {
+        // Change the map to 'zoo.png'
+        document.getElementById('mapImage').src = 'zoo.png';
+
+        // Hide existing dots
+        const existingDots = document.querySelectorAll('.dot');
+        existingDots.forEach(dot => {
+            dot.style.display = 'none';
+        });
+
+        // Create and display dot5 if it doesn't exist already
+        if (!document.getElementById('dot5')) {
+            const dot5 = document.createElement('div');
+            dot5.id = 'dot5';
+            dot5.className = 'dot';
+            dot5.style.top = '50%'; // Set position as needed
+            dot5.style.left = '50%'; // Set position as needed
+            dot5.style.display = 'block';
+
+            // Add click event to dot5
+            dot5.addEventListener('click', function() {
+                alert('Dot5 clicked!');
+            });
+
+            document.querySelector('.imageContainer').appendChild(dot5);
+        } else {
+            // If dot5 exists, just show it
+            document.getElementById('dot5').style.display = 'block';
+        }
+    } else {
+        // Show all dots and change the image back if needed
+        const existingDots = document.querySelectorAll('.dot');
+        existingDots.forEach(dot => {
+            dot.style.display = 'block';
+        });
+
+        // Optionally change the image back if another city is selected
+        document.getElementById('mapImage').src = 'aus map.png'; // or relevant image per city
+    }
+});
+
+	
+// 获取 total_cost 输入框元素
+
+var totalCostInput = document.getElementById('total_cost');
+
+// 监听 total_cost 输入框的 input 事件
+totalCostInput.addEventListener('input', function() {
+    // 获取输入框的当前值
+    var updatedTotalCost = totalCostInput.value;
+
+    // 更新 localStorage 中的 totalCost 值
+    localStorage.setItem('totalCost', updatedTotalCost);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取 total_cost 输入框元素
+    var totalCostInput = document.getElementById('total_cost');
+
+    // 从 localStorage 中获取 totalCost 值
+    var savedTotalCost = localStorage.getItem('totalCost');
+
+    // 如果 localStorage 中存在 totalCost 值，则将其显示在 total_cost 输入框中
+    if (savedTotalCost !== null) {
+        totalCostInput.value = savedTotalCost;
+    }
+
+    // 添加其他需要执行的代码
+    // ...
+});
+
+// 在子页面保存 cost 后触发的事件
+window.addEventListener('storage', function(event) {
+    // 如果修改的是 totalCost
+    if (event.key === 'totalCost') {
+        // 获取主页面的 total_cost 输入框元素
+        var totalCostInput = document.getElementById('total_cost');
+
+        // 更新 total_cost 输入框的值为最新的 totalCost 值
+        totalCostInput.value = event.newValue;
+    }
+});
+	
+</script>
+</body>
+</html>
