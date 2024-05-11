@@ -207,74 +207,74 @@ body {
     const svg = document.querySelector('.imageContainer > svg');
     let lastClickedDot = null;
 
-    // 为每个点添加点击事件监听
+    //add listener
     dots.forEach(dot => {
         dot.addEventListener('click', function() {
-            // 点变为蓝色
+            // dot change into blue
             this.classList.add('blue');
             
-            // 如果存在上一个被点击的点，则在两点间绘制线条
+            // create line
             if (lastClickedDot) {
                 createLine(lastClickedDot, this);
             }
-            // 更新最后被点击的点
+            // Update the dot
             lastClickedDot = this;
         });
     });
 
-    // 撤销按钮的逻辑
+    // Cancel element
     document.getElementById('undoButton').addEventListener('click', function() {
-        // 移除所有点的蓝色样式，恢复为初始状态（红色）
+        // Remove blue pattern
         dots.forEach(dot => {
             dot.classList.remove('blue');
         });
         
-        // 移除SVG内所有线条
+        // Remove Line in SVG
         while (svg.firstChild) {
             svg.removeChild(svg.firstChild);
         }
         
-        // 重置最后被点击的点
+        // Reset the dot
         lastClickedDot = null;
     });
 
-// 创建并绘制SVG线条的函数
+// Create and draw the SVG Function
 function createLine(from, to) {
     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    // 计算起始点和终点的位置
+    // Calculate the beginning and ending
     const x1 = from.offsetLeft + from.offsetWidth / 2;
     const y1 = from.offsetTop + from.offsetHeight / 2;
     const x2 = to.offsetLeft + to.offsetWidth / 2;
     const y2 = to.offsetTop + to.offsetHeight / 2;
-    // 设置线条属性
+    // Set the line
     line.setAttribute('x1', x1);
     line.setAttribute('y1', y1);
     line.setAttribute('x2', x2);
     line.setAttribute('y2', y2);
     line.setAttribute('stroke', 'black');
     
-    // 设置线条粗细
+    
     line.setAttribute('stroke-width', '4'); // 这里可以调整线条的粗细
 
-    // 添加鼠标悬停事件监听器
+    // Hover function
     line.addEventListener('mouseenter', function() {
-        // 当鼠标悬停在线条上时，显示时间在信息块中
+
         document.getElementById('Information').textContent = 'Depature: 13:50     Arrival: 14:40';
     });
 
-    // 添加鼠标离开事件监听器
+    // add mouse listener
     line.addEventListener('mouseleave', function() {
-        // 当鼠标离开线条时，清除信息块内容
+        // Clear the content after mounce leave the node
         document.getElementById('Information').textContent = '';
     });
 
-    // 添加双击事件监听器
+    // Double click
     line.addEventListener('dblclick', function() {
-        // 在双击线条时，跳转到route calculation.html页面
+        // turn to route calculation.html
         window.open('route calculation.html', '_blank');
     });
 
-    // 将线条添加到SVG元素中
+
     svg.appendChild(line);
 }
 
@@ -366,43 +366,43 @@ document.getElementById('cit').addEventListener('change', function() {
 });
 
 	
-// 获取 total_cost 输入框元素
+
 
 var totalCostInput = document.getElementById('total_cost');
 
-// 监听 total_cost 输入框的 input 事件
+// 
 totalCostInput.addEventListener('input', function() {
-    // 获取输入框的当前值
+    // 
     var updatedTotalCost = totalCostInput.value;
 
-    // 更新 localStorage 中的 totalCost 值
+    // 
     localStorage.setItem('totalCost', updatedTotalCost);
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 获取 total_cost 输入框元素
+    // 
     var totalCostInput = document.getElementById('total_cost');
 
-    // 从 localStorage 中获取 totalCost 值
+    // 
     var savedTotalCost = localStorage.getItem('totalCost');
 
-    // 如果 localStorage 中存在 totalCost 值，则将其显示在 total_cost 输入框中
+    // 
     if (savedTotalCost !== null) {
         totalCostInput.value = savedTotalCost;
     }
 
-    // 添加其他需要执行的代码
+    // 
     // ...
 });
 
-// 在子页面保存 cost 后触发的事件
+// Save the variable
 window.addEventListener('storage', function(event) {
-    // 如果修改的是 totalCost
+    // 
     if (event.key === 'totalCost') {
-        // 获取主页面的 total_cost 输入框元素
+        // 
         var totalCostInput = document.getElementById('total_cost');
 
-        // 更新 total_cost 输入框的值为最新的 totalCost 值
+        //
         totalCostInput.value = event.newValue;
     }
 });
